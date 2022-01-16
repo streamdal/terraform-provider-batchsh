@@ -80,13 +80,12 @@ func validateConfig(cfg *Config) error {
 func (a *ApiClient) Request(method, endpoint string, payload []byte) ([]byte, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	endpoint = fmt.Sprintf("http://localhost:8080/v1%s", endpoint)
+	endpoint = fmt.Sprintf("https://api.batch.sh/v1%s", endpoint)
 	req, err := http.NewRequest(method, endpoint, bytes.NewReader(payload))
 	if err != nil {
 		return nil, diag.FromErr(err)
 	}
 
-	// TODO: inject version in go build process
 	req.Header.Add("User-Agent", "terraform-provider-batchsh/"+a.Version)
 	req.Header.Add("Authorization", a.ApiToken)
 
