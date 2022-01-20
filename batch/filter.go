@@ -13,6 +13,10 @@ type Filter struct {
 	Values []string
 }
 
+// filterJSON takes a slice of map[string]interface{}, which represents the output of an API call to
+// https://api.batch.sh endpoint which returns a JSON array of objects(collections/schemas/etc). It then applies
+// the given filters to the JSON array and returns only entries in the data param which have a field that
+// matches a filter.
 func filterJSON(data []map[string]interface{}, filters []*Filter) ([]map[string]interface{}, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
