@@ -1,7 +1,8 @@
 # Terraform Provider for Batch.sh
 
 * Website: [batch.sh](https://batch.sh)
-* Support Slack
+* Email: [support@batch.sh](mailto:support@batch.sh)
+* Docs: [https://docs.batch.sh/platform/advanced/terraform-provider](https://docs.batch.sh/platform/advanced/terraform-provider)
 
 ### Importing existing collections or team members
 
