@@ -44,7 +44,7 @@ Required:
 
 - `id` - (String) - Batch Data Lake ID
 - `name` - (String) - Data Lake name
-- `type` - (String) - Data Lake type: `aws` (`azure` and gcp` are coming soon!)
+- `type` - (String) - Data Lake type: `aws` (`azure` and `gcp` are coming soon!)
 - `status` - (String) - Data Lake status slug
 - `status_full` - (String) - Readable data lake status
 - `inserted_at` - (String) - When Data Lake was created
