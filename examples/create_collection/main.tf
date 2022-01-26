@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     batchsh = {
-      version = "0.1.0"
-      source  = "batch.sh/tf/batchsh"
+      version = ">= 0.1.0, < 1.0.0"
+      source  = "batchcorp/batchsh"
     }
   }
 }
