@@ -188,8 +188,6 @@ github.com/hashicorp/terraform-plugin-sdk/v2/internal/tfdiags
 github.com/hashicorp/terraform-plugin-sdk/v2/meta
 github.com/hashicorp/terraform-plugin-sdk/v2/plugin
 github.com/hashicorp/terraform-plugin-sdk/v2/terraform
-# github.com/hashicorp/terraform-provider-scaffolding v0.0.0-20220105193258-eb7a02f312cd
-## explicit
 # github.com/hashicorp/terraform-registry-address v0.0.0-20210412075316-9b2996cce896
 github.com/hashicorp/terraform-registry-address
 # github.com/hashicorp/terraform-svchost v0.0.0-20200729002733-f050f53b9734
@@ -223,7 +221,7 @@ github.com/maxbrunsfeld/counterfeiter/v6
 github.com/maxbrunsfeld/counterfeiter/v6/arguments
 github.com/maxbrunsfeld/counterfeiter/v6/command
 github.com/maxbrunsfeld/counterfeiter/v6/generator
-# github.com/minio/pkg v1.1.14
+# github.com/minio/pkg v1.1.15
 ## explicit
 github.com/minio/pkg/wildcard
 # github.com/mitchellh/cli v1.1.2
