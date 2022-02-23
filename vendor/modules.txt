@@ -221,7 +221,7 @@ github.com/maxbrunsfeld/counterfeiter/v6
 github.com/maxbrunsfeld/counterfeiter/v6/arguments
 github.com/maxbrunsfeld/counterfeiter/v6/command
 github.com/maxbrunsfeld/counterfeiter/v6/generator
-# github.com/minio/pkg v1.1.15
+# github.com/minio/pkg v1.1.16
 ## explicit
 github.com/minio/pkg/wildcard
 # github.com/mitchellh/cli v1.1.2
