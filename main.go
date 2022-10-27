@@ -20,6 +20,8 @@ import (
 // can be customized.
 //go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 
+const defaultAPIEndpoint = "https://api.batch.sh"
+
 var (
 	// these will be set by the goreleaser configuration
 	// to appropriate values for the compiled binary
@@ -35,10 +37,10 @@ func main() {
 	flag.BoolVar(&debugMode, "debug", false, "set to true to run the provider with support for debuggers like delve")
 	flag.Parse()
 
-	opts := &plugin.ServeOpts{ProviderFunc: provider.New(version, "")}
+	opts := &plugin.ServeOpts{ProviderFunc: provider.New(version, "", defaultAPIEndpoint)}
 
 	if debugMode {
-		err := plugin.Debug(context.Background(), "batch.sh/tf/batch", opts)
+		err := plugin.Debug(context.Background(), "batch.sh/tf/batchsh", opts)
 		if err != nil {
 			log.Fatal(err.Error())
 		}

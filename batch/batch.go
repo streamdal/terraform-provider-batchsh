@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 
@@ -49,9 +49,10 @@ type ErrorResponse struct {
 }
 
 type Config struct {
-	HttpClient *http.Client
-	ApiToken   string
-	Version    string
+	HttpClient  *http.Client
+	ApiToken    string
+	Version     string
+	APIEndpoint string
 }
 
 func New(cfg *Config) (IBatchAPI, error) {
@@ -80,7 +81,7 @@ func validateConfig(cfg *Config) error {
 func (a *ApiClient) Request(method, endpoint string, payload []byte) ([]byte, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	endpoint = fmt.Sprintf("https://api.batch.sh/v1%s", endpoint)
+	endpoint = fmt.Sprintf("%s%s", a.APIEndpoint, endpoint)
 	req, err := http.NewRequest(method, endpoint, bytes.NewReader(payload))
 	if err != nil {
 		return nil, diag.FromErr(err)
@@ -95,7 +96,7 @@ func (a *ApiClient) Request(method, endpoint string, payload []byte) ([]byte, di
 	}
 	defer r.Body.Close()
 
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		diags = append(diags, diag.Diagnostic{
 			Severity: diag.Error,

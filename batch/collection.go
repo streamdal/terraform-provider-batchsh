@@ -3,6 +3,7 @@ package batch
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 )
@@ -69,7 +70,7 @@ type UpdateCollectionResponse struct {
 func (a *ApiClient) GetCollection(collectionID string) (*ReadCollectionResponse, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	body, moreDiags := a.Request("GET", fmt.Sprintf("/collection/%s", collectionID), nil)
+	body, moreDiags := a.Request(http.MethodGet, fmt.Sprintf("/v1/collection/%s", collectionID), nil)
 	if moreDiags.HasError() {
 		diags = append(diags, moreDiags...)
 		return nil, diags
@@ -101,7 +102,7 @@ func (a *ApiClient) CreateCollection(params *CreateCollectionRequest) (*CreateCo
 		return nil, diags
 	}
 
-	body, moreDiags := a.Request("POST", "/collection", reqBody)
+	body, moreDiags := a.Request(http.MethodPost, "/v1/collection", reqBody)
 	if moreDiags.HasError() {
 		diags = append(diags, moreDiags...)
 		return nil, diags
@@ -133,7 +134,7 @@ func (a *ApiClient) UpdateCollection(collectionID string, params *UpdateCollecti
 		return nil, diags
 	}
 
-	body, moreDiags := a.Request("PUT", "/collection", reqBody)
+	body, moreDiags := a.Request(http.MethodPut, "/v1/collection", reqBody)
 	if moreDiags.HasError() {
 		diags = append(diags, moreDiags...)
 		return nil, diags
@@ -170,7 +171,7 @@ func (a *ApiClient) DeleteCollection(collectionID string) (*UpdateCollectionResp
 		return nil, diags
 	}
 
-	body, moreDiags := a.Request("PUT", "/collection", reqBody)
+	body, moreDiags := a.Request(http.MethodPut, "/v1/collection", reqBody)
 	if moreDiags.HasError() {
 		diags = append(diags, moreDiags...)
 		return nil, diags

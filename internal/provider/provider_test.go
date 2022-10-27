@@ -20,7 +20,7 @@ var providerFactories = map[string]func() (*schema.Provider, error){}
 func ProviderFactory(fakeApiClient batch.IBatchAPI) map[string]func() (*schema.Provider, error) {
 	factories := map[string]func() (*schema.Provider, error){}
 	factories["batchsh"] = func() (*schema.Provider, error) {
-		p := New("dev", "test")()
+		p := New("dev", "test", "http://localhost:8080")()
 
 		p.ConfigureContextFunc = func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 			return fakeApiClient, nil
@@ -33,7 +33,7 @@ func ProviderFactory(fakeApiClient batch.IBatchAPI) map[string]func() (*schema.P
 }
 
 func TestProvider(t *testing.T) {
-	if err := New("dev", "test")().InternalValidate(); err != nil {
+	if err := New("dev", "test", "http://localhost:8080")().InternalValidate(); err != nil {
 		t.Fatalf("err: %s", err)
 	}
 }
