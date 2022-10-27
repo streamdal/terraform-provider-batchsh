@@ -22,7 +22,7 @@ func init() {
 	}
 }
 
-func New(version, apiToken string) func() *schema.Provider {
+func New(version, apiToken, apiEndpoint string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
 			Schema: map[string]*schema.Schema{
@@ -30,6 +30,11 @@ func New(version, apiToken string) func() *schema.Provider {
 					Type:        schema.TypeString,
 					Required:    true,
 					DefaultFunc: schema.EnvDefaultFunc("BATCHSH_TOKEN", apiToken),
+				},
+				"api_endpoint": {
+					Type:        schema.TypeString,
+					Required:    true,
+					DefaultFunc: schema.EnvDefaultFunc("BATCHSH_API_ENDPOINT", apiEndpoint),
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
@@ -50,12 +55,14 @@ func New(version, apiToken string) func() *schema.Provider {
 
 func configure(version string, p *schema.Provider) func(context.Context, *schema.ResourceData) (interface{}, diag.Diagnostics) {
 	return func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
+		apiEndpoint := d.Get("api_endpoint").(string)
 		token := d.Get("token").(string)
 		token = fmt.Sprintf("Bearer %s", token)
 
 		b, err := batch.New(&batch.Config{
-			ApiToken: token,
-			Version:  version,
+			ApiToken:    token,
+			Version:     version,
+			APIEndpoint: apiEndpoint,
 		})
 		if err != nil {
 			return nil, diag.FromErr(err)

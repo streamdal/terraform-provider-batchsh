@@ -2,6 +2,7 @@ package batch
 
 import (
 	"encoding/json"
+	"net/http"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 )
@@ -9,7 +10,7 @@ import (
 func (a *ApiClient) GetDataLake(filters []*Filter) (map[string]interface{}, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	resp, moreDiags := a.Request("GET", "/datalake", nil)
+	resp, moreDiags := a.Request(http.MethodGet, "/v1/datalake", nil)
 	if moreDiags.HasError() {
 		return nil, append(diags, moreDiags...)
 	}
