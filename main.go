@@ -20,7 +20,7 @@ import (
 // can be customized.
 //go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 
-const defaultAPIEndpoint = "https://api.batch.sh"
+const defaultAPIEndpoint = "https://api.streamdal.com"
 
 var (
 	// these will be set by the goreleaser configuration
